@@ -1,0 +1,12 @@
+link do codigo rodando do Wokwi: https://wokwi.com/projects/475151421791145985
+
+void setup() {
+  pinMode(13, OUTPUT);
+}
+
+void loop() {
+  digitalWrite(13, HIGH);
+  delay(500);
+  digitalWrite(13, LOW);
+  delay(500);
+}
