@@ -1,0 +1,21 @@
+link do código do Wokwi: https://wokwi.com/projects/475959248119924737
+
+const int pinoBotao = 2;   
+const int pinoLed = 13;    
+
+void setup() {
+  pinMode(pinoLed, OUTPUT);     
+  pinMode(pinoBotao, INPUT_PULLUP); 
+}
+
+void loop() {
+  int estadoBotao = digitalRead(pinoBotao);
+
+  if (estadoBotao == LOW) {
+    digitalWrite(pinoLed, HIGH);  
+    delay(3000);                   
+    
+    digitalWrite(pinoLed, LOW);    
+    delay(1000);                   
+  }
+}
