@@ -1,0 +1,71 @@
+codigo do Wokwi: https://wokwi.com/projects/476413453113996289
+
+const int pinoLDR = A0;
+const int pinoPIR = 2;
+
+const int pinoLED = 7;
+const int pinoBuzzer = 8;
+const int pinoRele = 9;
+
+const int LIMITE_ESCURO = 100;
+
+void setup() {
+
+  pinMode(pinoPIR, INPUT);
+
+  pinMode(pinoLED, OUTPUT);
+  pinMode(pinoBuzzer, OUTPUT);
+  pinMode(pinoRele, OUTPUT);
+
+  digitalWrite(pinoLED, LOW);
+  digitalWrite(pinoBuzzer, LOW);
+  digitalWrite(pinoRele, LOW);
+
+  Serial.begin(9600);
+}
+
+void loop() {
+
+  int leituraLuz = analogRead(pinoLDR);
+  int movimento = digitalRead(pinoPIR);
+
+  // Verifica se está escuro
+  bool escuro = leituraLuz < LIMITE_ESCURO;
+
+  // PIR só fica válido quando está escuro
+  bool presenca = escuro && (movimento == HIGH);
+
+  Serial.print("Luz: ");
+  Serial.print(leituraLuz);
+
+  Serial.print(" | Movimento: ");
+  Serial.print(movimento);
+
+  Serial.print(" | Escuro: ");
+  Serial.print(escuro);
+
+  Serial.print(" | Presenca: ");
+  Serial.println(presenca);
+
+  if (presenca) {
+
+    digitalWrite(pinoLED, HIGH);
+    digitalWrite(pinoBuzzer, HIGH);
+
+  } else {
+
+    digitalWrite(pinoLED, LOW);
+    digitalWrite(pinoBuzzer, LOW);
+  }
+
+  if (presenca) {
+
+    digitalWrite(pinoRele, HIGH);
+
+  } else {
+
+    digitalWrite(pinoRele, LOW);
+  }
+
+  delay(200);
+}
